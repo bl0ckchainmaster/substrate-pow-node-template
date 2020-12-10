@@ -1,0 +1,86 @@
+[package]
+name = 'basic-pow'
+version = "2.0.0"
+edition = '2018'
+authors = ['Substrate DevHub <https://github.com/substrate-developer-hub>']
+repository = 'https://github.com/substrate-developer-hub/recipes'
+description = 'A Substrate node that demonstrates minimal proof of work consensus'
+license = "GPL-3.0-or-later"
+
+[package.metadata.substrate]
+categories = [
+	"Node",
+	"PoW",
+	"tutorial",
+	"recipe",
+]
+compatibility_version = "2.0.0"
+
+[[bin]]
+name = 'basic-pow'
+path = 'src/main.rs'
+
+[dependencies]
+futures = '0.3.4'
+log = '0.4.8'
+rand = { version = "0.7.2", features = ["small_rng"] }
+sha3 = "0.8.0"
+structopt = '0.3.8'
+
+# Substrate packages
+frame-benchmarking = '2.0.0'
+frame-benchmarking-cli = '2.0.0'
+pallet-transaction-payment-rpc = '2.0.0'
+
+
+sc-basic-authorship = '0.8.0'
+sc-cli = { features = ['wasmtime'], version = '0.8.0' }
+sc-client-api = '2.0.0'
+sc-consensus = '0.8.0'
+sc-consensus-pow = '0.8.0'
+sc-executor = { features = ['wasmtime'], version = '0.8.0' }
+sc-rpc = '2.0.0'
+sc-rpc-api = '0.8.0'
+
+sc-network = '0.8.0'
+sc-service = { features = ['wasmtime'], version = '0.8.0' }
+sc-transaction-pool = '2.0.0'
+
+sp-api = '2.0.0'
+sp-block-builder = '2.0.0'
+sp-blockchain = '2.0.0'
+sp-consensus = '0.8.0'
+sp-core = '2.0.0'
+sp-inherents = '2.0.0'
+sp-runtime = '2.0.0'
+sp-timestamp = '2.0.0'
+sp-transaction-pool = '2.0.0'
+substrate-frame-rpc-system = '2.0.0'
+# local packages
+
+sha3pow = { path = '../consensus/sha3pow' }
+
+# This node is compatible with any of the runtimes below
+# ---
+
+# Node Template runtime
+runtime = { package = "node-template-runtime", path = "../runtime" }
+
+
+# Common runtime configured with most Recipes pallets.
+#runtime = { package = "super-runtime", path = "runtimes" }
+
+# Runtime with custom weight and fee calculation.
+# runtime = { package = "weight-fee-runtime", path = "../../runtimes/weight-fee-runtime"}
+
+# Runtime with custom runtime-api (custom API only used in rpc-node)
+# runtime = { package = "api-runtime", path = "../../runtimes/api-runtime" }
+# ---
+
+[features]
+default = []
+runtime-benchmarks = ['runtime/runtime-benchmarks']
+
+[build-dependencies]
+substrate-build-script-utils = '2.0.0'
+vergen = '3.1.0'
